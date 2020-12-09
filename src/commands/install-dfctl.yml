@@ -1,7 +1,8 @@
 description: >
-  Installs the deepfactor command line tool
+  Installs the DeepFactor cli tool
 steps:
   - run:
+      name: Install the DeepFactor cli tool
       command: |
         [ -w /usr/local/bin ] && SUDO="" || SUDO=sudo
         $SUDO apt-get update

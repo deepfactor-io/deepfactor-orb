@@ -1,5 +1,5 @@
 description: >
-  Instrument and run application or test
+  Instrument and run app/test
 parameters:
   tag:
     type: string
@@ -24,6 +24,7 @@ parameters:
     description: "The DeepFactor run token for instrumenting the application"
 steps:
   - run:
+      name: Instrument and run app/test
       shell: /bin/sh
       command: |
         echo DF_RUN_TOKEN=${<<parameters.run-token>>} >> "${BASH_ENV}"
