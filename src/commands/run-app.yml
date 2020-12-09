@@ -31,7 +31,7 @@ steps:
           echo "The deepfactor run token <<parameters.run-token>> is not set"
           exit 1
         fi
-        if [ -z "$<<parameters.tag>>" ]; then
+        if [ -z "<<parameters.tag>>" ]; then
           dfctl run -v -a <<parameters.app-name>> -c <<parameters.component-name>> --cmd "<<parameters.cmd>>" --version "<<parameters.version>>"
         else
           dfctl run -v -a <<parameters.app-name>> -c <<parameters.component-name>> -t <<parameters.tag>> --cmd "<<parameters.cmd>>" --version "<<parameters.version>>"
