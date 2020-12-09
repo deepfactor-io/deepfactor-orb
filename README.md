@@ -15,7 +15,7 @@ Example `config.yml`:
 version: 2.1
 
 orbs:
-  deepfactor: deepfactor/deepfactor@1.0.0
+  deepfactor: deepfactor/deepfactor-orb@1.0.0
 
 workflows:
   scan-workflow:
