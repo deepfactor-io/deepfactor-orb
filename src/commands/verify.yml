@@ -26,5 +26,7 @@ steps:
       command: << include(scripts/verify.sh) >>
   - store_artifacts:
       path: df_alert_summary.json
+      destination: deepfactor
   - store_artifacts:
       path: df_alert_list.json
+      destination: deepfactor
