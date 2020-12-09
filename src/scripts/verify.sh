@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo DF_API_KEY="${API_KEY}" >> "${BASH_ENV}"
-echo
+
 if [[ -z "$DF_API_KEY" ]]; then
     echo "DF_API_KEY environment variable missing"
     exit 1

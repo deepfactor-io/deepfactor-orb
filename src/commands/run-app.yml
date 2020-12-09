@@ -3,12 +3,12 @@ description: >
 parameters:
   tag:
     type: string
-    description: "The tag to pass to deepfactor"
+    description: "The tag to pass to deepfactor in the format of key=value"
     default: ""
   version:
     type: string
     description: "The component version"
-    default: ""
+    default: ${CIRCLE_BUILD_NUM}
   app-name:
     type: string
     description: "The app name to be used inside DeepFactor"
@@ -27,4 +27,12 @@ steps:
       shell: /bin/sh
       command: |
         echo DF_RUN_TOKEN=${<<parameters.run-token>>} >> "${BASH_ENV}"
-        dfctl run -v -a <<parameters.app-name>> -c <<parameters.component-name>> -t <<parameters.tag>> --cmd "<<parameters.cmd>>" --version ${CIRCLE_BUILD_NUM}
+        if [ -z ${<<parameters.run-token>>} ]; then
+          echo "The deepfactor run token <<parameters.run-token>> is not set"
+          exit 1
+        fi
+        if [ -z ${<<parameters.tag>>} ]; then
+          dfctl run -v -a <<parameters.app-name>> -c <<parameters.component-name>> --cmd "<<parameters.cmd>>" --version "<<parameters.version>>"
+        else
+          dfctl run -v -a <<parameters.app-name>> -c <<parameters.component-name>> -t <<parameters.tag>> --cmd "<<parameters.cmd>>" --version "<<parameters.version>>"
+        fi

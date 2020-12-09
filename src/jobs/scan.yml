@@ -19,23 +19,20 @@ parameters:
   portal-url:
     type: string
     description: URL of your DeepFactor portal eg. https://deepfactor.mycompany.com
-    default: ""
   app-name:
     type: string
     description: The name of the application in DeepFactor
-    default: ""
   component-name:
     type: string
     description: The name of the component in DeepFactor
-    default: ""
   tag:
     type: string
-    description: Optional tag
+    description: Optional tag in the form of key:value
     default: ""
   version:
     type: string
     description: Optional version number
-    default: ""
+    default: ${CIRCLE_BUILD_NUM}
   pre-run:
     type: steps
     default: []
@@ -47,7 +44,6 @@ parameters:
   cmd:
     type: string
     description: The command to be executed to run the application/test eg. /usr/bin/java -jar acme.jar
-    default: ""
 
 executor: <<parameters.executor>>
 steps:
