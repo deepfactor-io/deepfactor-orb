@@ -59,8 +59,8 @@ steps:
       tag: <<parameters.tag>>
       cmd: <<parameters.cmd>>
   - run:
-      command: sleep 2m
-      no_output_timeout: 10m
+      command: sleep 10m
+      no_output_timeout: 15m
   - verify:
       app-name: <<parameters.app-name>>
       component-name: <<parameters.component-name>>

@@ -22,7 +22,7 @@ jobs:
       - image: cimg/base:stable
     steps:
       - checkout
-      #- deepfactor-orb/install-dfctl
+      - deepfactor-orb/install-dfctl
 
 workflows:
   # This workflow will run on every commit
