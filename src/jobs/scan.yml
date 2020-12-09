@@ -2,12 +2,10 @@ description: >
   Instrument your application or tests and gather insights from DeepFactor to see if any
   issues were detected in your build
 parameters:
-  executor:
-    type: executor
-    default: default
-    description: >
-      Executor within which to run this job, defaults to this orb's own
-      `default` executor.
+  image:
+    description: Enter a custom docker image for this job. By default CircleCI's optimized `cimg/base` image will be used.
+    type: string
+    default: "cimg/base:stable"
   run-token:
     type: env_var_name
     default: DF_RUN_TOKEN
@@ -45,7 +43,9 @@ parameters:
     type: string
     description: The command to be executed to run the application/test eg. /usr/bin/java -jar acme.jar
 
-executor: <<parameters.executor>>
+docker:
+  - image: <<parameters.image>>
+
 steps:
   - install-dfctl
   - steps: <<parameters.pre-run>>
