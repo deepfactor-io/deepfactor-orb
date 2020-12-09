@@ -1,6 +1,6 @@
 description: >
-  This example shows how to scan CircleCI-Public/circleci-demo-javascript-express 
-  project in the build pipeline 
+  This example shows how to scan CircleCI-Public/circleci-demo-javascript-express
+  project in the build pipeline
 usage:
   version: 2.1
   orbs:
