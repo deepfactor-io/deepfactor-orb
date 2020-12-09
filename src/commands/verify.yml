@@ -1,0 +1,32 @@
+description: >
+  This command checks for any issues and generates the report and publishes to the artifacts
+parameters:
+  api-key:
+    type: env_var_name
+    default: DF_API_KEY
+    description: >
+      Name of the environment variable storing your DeepFactor API Key
+  app-name:
+    type: string
+    description: "The app name inside DeepFactor"
+  component-name:
+    type: string
+    description: "The component name to be used inside DeepFactor"
+  portal-url:
+    type: string
+    description: "The DeepFactor portal url eg https://portal.deepfactor.io"
+steps:
+  #- run:
+  #    command: sleep m
+  #    no_output_timeout: 15m
+  - run:
+      environment:
+        DF_APP: <<parameters.app-name>>
+        DF_COMPONENT: <<parameters.component-name>>
+        DF_PORTAL_URL: <<parameters.portal-url>>
+        API_KEY: <<parameters.api-key>>
+      command: << include(scripts/verify.sh) >>
+  - store_artifacts:
+      path: df_alert_summary.json
+  - store_artifacts:
+      path: df_alert_list.json

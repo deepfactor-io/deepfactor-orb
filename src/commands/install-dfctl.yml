@@ -1,0 +1,9 @@
+description: >
+  Installs the deepfactor command line tool
+steps:
+  - run:
+      command: |
+        [ -w /usr/local/bin ] && SUDO="" || SUDO=sudo
+        $SUDO apt-get update
+        $SUDO apt-get install -y apt-transport-https
+        curl https://repo.deepfactor.io/install-dfctl.sh | $SUDO sh -

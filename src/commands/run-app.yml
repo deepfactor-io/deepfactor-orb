@@ -1,0 +1,30 @@
+description: >
+  Instrument and run application or test
+parameters:
+  tag:
+    type: string
+    description: "The tag to pass to deepfactor"
+    default: ""
+  version:
+    type: string
+    description: "The component version"
+    default: ""
+  app-name:
+    type: string
+    description: "The app name to be used inside DeepFactor"
+  component-name:
+    type: string
+    description: "The component name to be used inside DeepFactor"
+  cmd:
+    type: string
+    description: "The command to be executed to run the application eg. would be /usr/bin/npm run or java -jar acme.jar"
+  run-token:
+    type: env_var_name
+    default: DF_RUN_TOKEN
+    description: "The DeepFactor run token for instrumenting the application"
+steps:
+  - run:
+      shell: /bin/sh
+      command: |
+        echo DF_RUN_TOKEN=${<<parameters.run-token>>} >> "${BASH_ENV}"
+        dfctl run -v -a <<parameters.app-name>> -c <<parameters.component-name>> -t <<parameters.tag>> --cmd "<<parameters.cmd>>" --version ${CIRCLE_BUILD_NUM}

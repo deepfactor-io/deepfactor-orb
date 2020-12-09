@@ -1,13 +1,36 @@
 description: >
-  Sample example description.
-# Provide a use-case based example for using this orb.
-# Everything in the `usage` section will be displayed in the orb registry.
-# Comments are not retained.
+  This example shows how to scan CircleCI-Public/circleci-demo-javascript-express 
+  project in the build pipeline 
 usage:
   version: 2.1
   orbs:
-    <orb-name>: <namespace>/<orb-name>@1.2.3
+    deepfactor: deepfactor/deepfactor@1.0.0
   workflows:
-    use-my-orb:
+    version: 2.1
+    build:
       jobs:
-        - <orb-name>/<job-name>
+        - deepfactor/scan:
+            executor: my-executor
+            portal-url: "https://yourdeepfactor.yourcompany.com"
+            app-name: circleci-demo-job
+            component-name: circleci-demo-javascript-express
+            pre-run:
+              - checkout
+              - run:
+                  name: update-npm
+                  command: 'sudo npm install -g npm@5'
+              - restore_cache:
+                  key: dependency-cache-{{ checksum "package-lock.json" }}
+              - run:
+                  name: install-npm-wee
+                  command: npm install
+              - save_cache:
+                  key: dependency-cache-{{ checksum "package-lock.json" }}
+                  paths:
+                    - ./node_modules
+            cmd: "/usr/local/bin/npm test"
+            tag: "circleci-build"
+  executors:
+    my-executor:
+      docker:
+        - image: circleci/node:10.16.3

@@ -1,41 +1,37 @@
-# Orb Project Template
-
+# DeepFactor Orb
 [![CircleCI Build Status](https://circleci.com/gh/deepfactor-io/deepfactor-orb.svg?style=shield "CircleCI Build Status")](https://circleci.com/gh/deepfactor-io/deepfactor-orb) [![CircleCI Orb Version](https://img.shields.io/badge/endpoint.svg?url=https://badges.circleci.io/orb/deepfactor/deepfactor-orb)](https://circleci.com/orbs/registry/orb/deepfactor/deepfactor-orb) [![GitHub License](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/deepfactor-io/deepfactor-orb/master/LICENSE) [![CircleCI Community](https://img.shields.io/badge/community-CircleCI%20Discuss-343434.svg)](https://discuss.circleci.com/c/ecosystem/orbs)
 
+[![DeepFactor](https://static.deepfactor.io/logo.png)](https://deepfactor.io)
 
+A CircleCI Orb for adding DeepFactor’s 'Continuous Observability for DevSecOps' into your CI/CD pipeline to identify runtime security, privacy, and compliance risks in your application without changing a single line of code.
+To use this orb you simply need a running instance of the DeepFactor portal. Register [here](https://my.deepfactor.io/register) and get started today.
 
-A starter template for orb projects. Build, test, and publish orbs automatically on CircleCI with [Orb-Tools](https://circleci.com/orbs/registry/orb/circleci/orb-tools).
+## About DeepFactor
 
-Additional READMEs are available in each directory.
+## Usage Examples
+Example `config.yml`:
 
+```yaml
+version: 2.1
 
+orbs:
+  deepfactor: deepfactor/deepfactor@1.0.0
 
-## Resources
+workflows:
+  scan-workflow:
+    jobs:
+      - deepfactor/scan:
+          portal-url: deepfactor.mycompany.org
+          app-name: sample-app
+          component-name: demo-express 
+          pre-run: steps-to-run-before-test
+          cmd: command-to-run-tests
+          post-run: steps-to-run-after-test 
+```
 
-[CircleCI Orb Registry Page](https://circleci.com/orbs/registry/orb/deepfactor/deepfactor-orb) - The official registry page of this orb for all versions, executors, commands, and jobs described.
-[CircleCI Orb Docs](https://circleci.com/docs/2.0/orb-intro/#section=configuration) - Docs for using and creating CircleCI Orbs.
-
-### How to Contribute
-
-We welcome [issues](https://github.com/deepfactor-io/deepfactor-orb/issues) to and [pull requests](https://github.com/deepfactor-io/deepfactor-orb/pulls) against this repository!
-
-### How to Publish
-* Create and push a branch with your new features.
-* When ready to publish a new production version, create a Pull Request from fore _feature branch_ to `master`.
-* The title of the pull request must contain a special semver tag: `[semver:<segement>]` where `<segment>` is replaced by one of the following values.
-
-| Increment | Description|
-| ----------| -----------|
-| major     | Issue a 1.0.0 incremented release|
-| minor     | Issue a x.1.0 incremented release|
-| patch     | Issue a x.x.1 incremented release|
-| skip      | Do not issue a release|
-
-Example: `[semver:major]`
-
-* Squash and merge. Ensure the semver tag is preserved and entered as a part of the commit message.
-* On merge, after manual approval, the orb will automatically be published to the Orb Registry.
-
-
-For further questions/comments about this or other orbs, visit the Orb Category of [CircleCI Discuss](https://discuss.circleci.com/c/orbs).
-
+## Get DeepFactor
+1. Sign up for [DeepFactor.io](htts://deepfactor.io) community edition
+2. Install DeepFactor portal using the following the instructions [here](https://docs.deepfactor.io/hc/en-us/categories/360004380213-Getting-Started)
+3. Within Circle CI, build your app & scan your code/build artifacts/containers for static visibility
+4. Test: turn on your automated tests
+5. Observe: Use this orb to run your app with DeepFactor for runtime visibility

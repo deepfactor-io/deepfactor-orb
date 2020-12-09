@@ -1,0 +1,68 @@
+description: >
+  Instrument your application or tests and gather insights from DeepFactor to see if any
+  issues were detected in your build
+parameters:
+  executor:
+    type: executor
+    default: default
+    description: >
+      Executor within which to run this job, defaults to this orb's own
+      `default` executor.
+  run-token:
+    type: env_var_name
+    default: DF_RUN_TOKEN
+    description: "The DeepFactor run token for instrumenting the application"
+  api-key:
+    type: env_var_name
+    default: DF_API_KEY
+    description: Name of the environment variable storing your DeepFactor API Key
+  portal-url:
+    type: string
+    description: URL of your DeepFactor portal eg. https://deepfactor.mycompany.com
+    default: ""
+  app-name:
+    type: string
+    description: The name of the application in DeepFactor
+    default: ""
+  component-name:
+    type: string
+    description: The name of the component in DeepFactor
+    default: ""
+  tag:
+    type: string
+    description: Optional tag
+    default: ""
+  version:
+    type: string
+    description: Optional version number
+    default: ""
+  pre-run:
+    type: steps
+    default: []
+    description: "A list of steps that are run before running the tests/application"
+  post-run:
+    type: steps
+    default: []
+    description: "A list of steps to run after running the tests/application"
+  cmd:
+    type: string
+    description: The command to be executed to run the application/test eg. /usr/bin/java -jar acme.jar
+    default: ""
+
+executor: <<parameters.executor>>
+steps:
+  - install-dfctl
+  - steps: <<parameters.pre-run>>
+  - run-app:
+      app-name: <<parameters.app-name>>
+      component-name: <<parameters.component-name>>
+      tag: <<parameters.tag>>
+      cmd: <<parameters.cmd>>
+  - run:
+      command: sleep 2m
+      no_output_timeout: 10m
+  - verify:
+      app-name: <<parameters.app-name>>
+      component-name: <<parameters.component-name>>
+      portal-url: <<parameters.portal-url>>
+  - steps: <<parameters.post-run>>
