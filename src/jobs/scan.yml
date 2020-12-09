@@ -32,7 +32,7 @@ parameters:
   version:
     type: string
     description: Optional version number
-    default: ${CIRCLE_BUILD_NUM}
+    default: '${CIRCLE_BUILD_NUM}'
   pre-run:
     type: steps
     default: []
@@ -55,6 +55,7 @@ steps:
       tag: <<parameters.tag>>
       cmd: <<parameters.cmd>>
   - run:
+      name: Waiting for DeepFactor to scan
       command: sleep 10m
       no_output_timeout: 15m
   - verify:

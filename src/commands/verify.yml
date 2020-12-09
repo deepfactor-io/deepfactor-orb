@@ -16,9 +16,6 @@ parameters:
     type: string
     description: "The DeepFactor portal url eg https://portal.deepfactor.io"
 steps:
-  #- run:
-  #    command: sleep m
-  #    no_output_timeout: 15m
   - run:
       name: Verify and report issues detected by DeepFactor
       environment:
