@@ -43,7 +43,7 @@ echo "component_id=${component_id}"
 component_security_summary=$( jq -r '.security' <<< "$component_version_tuple")
 
 summary=$(jq -r '{ total: .total, p1: .p1, p2: .p2, p3: .p3, p4: .p4 }' <<< "$component_security_summary")
-cat <<< "$summary" > df_alert_summary.json
+cat <<< "$summary" > deepfactor_summary.json
 
 alert_details=$(curl -ks -H "Authorization: Bearer ${DF_API_KEY}" -X GET "${DF_PORTAL_URL}/api/services/v1/alerts?application_id=${application_id}&component_id=${component_id}&version_type=latest" | jq -r --arg portal "${DF_PORTAL_URL}" '[.data.alerts[] | {alertType: .alertType, severity: .severity, title: .title ,dfa: .dfa, link: ($portal + "/alerts/" + .dfa)}]' )
-cat <<< "$alert_details" > df_alert_list.json
+cat <<< "$alert_details" > deepfactor_alert_list.json
