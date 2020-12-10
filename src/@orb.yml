@@ -1,9 +1,8 @@
 version: 2.1
 
 description: >
-  Integrate DeepFactor into your CircleCI pipelines
-# What will your orb allow users to accomplish?
-# Descriptions should be short, simple, and informative.
+  Enable continuous observability for DevSecOps. Developers can rapidly find and triage runtime Security, Privacy, and Compliance risks within your CircleCI pipeline while the AppSec team can set guardrails, receive alerts, and have continuous visibility with every build.
+  DeepFactor delivers 4 groups of insights today: (1) Code Execution Risks, (2) AppSec Policy Alerts, (3) OWASP Scan Results, and (4) Prioritized Vulnerabilities based on the actual app behavior. Go from Runtime Blind™ to Runtime Ready™.
 
 display:
   home_url: "https://deepfactor.io"

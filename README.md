@@ -6,10 +6,9 @@
 A CircleCI Orb for adding DeepFactor’s 'Continuous Observability for DevSecOps' into your CI/CD pipeline to identify runtime security, privacy, and compliance risks in your application without changing a single line of code.
 To use this orb you simply need a running instance of the DeepFactor portal. Register [here](https://my.deepfactor.io/register) and get started today.
 
-## About DeepFactor
 
 ## Usage Examples
-Example `config.yml`:
+### Scan Application
 
 ```yaml
 version: 2.1

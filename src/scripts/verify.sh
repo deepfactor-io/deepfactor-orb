@@ -30,10 +30,6 @@ if [[ "$status" != "0" ]]; then
    exit 1
 fi
 
-echo "app:${DF_APP}"
-echo "component:${DF_COMPONENT}"
-echo "portal_url:${DF_PORTAL_URL}"
-echo "api_key:${DF_API_KEY}"
 
 # Get application
 application_id=$( curl -ks -X GET "${DF_PORTAL_URL}/api/services/v1/applications" -H "Authorization: Bearer ${DF_API_KEY}" | jq -r --arg v "${DF_APP}" '.data.apps[] | select (.name==$v) | .application_id' )
@@ -47,7 +43,7 @@ echo "component_id=${component_id}"
 component_security_summary=$( jq -r '.security' <<< "$component_version_tuple")
 
 summary=$(jq -r '{ total: .total, p1: .p1, p2: .p2, p3: .p3, p4: .p4 }' <<< "$component_security_summary")
-cat <<< "$summary" > df_alert_summary.json
+cat <<< "$summary" > deepfactor_summary.json
 
 alert_details=$(curl -ks -H "Authorization: Bearer ${DF_API_KEY}" -X GET "${DF_PORTAL_URL}/api/services/v1/alerts?application_id=${application_id}&component_id=${component_id}&version_type=latest" | jq -r --arg portal "${DF_PORTAL_URL}" '[.data.alerts[] | {alertType: .alertType, severity: .severity, title: .title ,dfa: .dfa, link: ($portal + "/alerts/" + .dfa)}]' )
-cat <<< "$alert_details" > df_alert_list.json
+cat <<< "$alert_details" > deepfactor_alert_list.json
