@@ -31,13 +31,6 @@ if [[ "$status" != "0" ]]; then
 fi
 
 
-DF_PORTAL_URL=$(echo "${DF_PORTAL_URL%/*}")
-
-echo "app:${DF_APP}"
-echo "component:${DF_COMPONENT}"
-echo "portal_url:${DF_PORTAL_URL}"
-echo "api_key:${DF_API_KEY}"
-
 # Get application
 application_id=$( curl -ks -X GET "${DF_PORTAL_URL}/api/services/v1/applications" -H "Authorization: Bearer ${DF_API_KEY}" | jq -r --arg v "${DF_APP}" '.data.apps[] | select (.name==$v) | .application_id' )
 echo "application_id=${application_id}"
