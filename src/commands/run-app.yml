@@ -21,7 +21,7 @@ parameters:
   run-token:
     type: env_var_name
     default: DF_RUN_TOKEN
-    description: "The DeepFactor run token for instrumenting the application"
+    description: "The name of the environment variable storing your DeepFactor run token for instrumenting the application"
 steps:
   - run:
       name: Instrument and run app/test
