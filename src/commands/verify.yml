@@ -25,8 +25,6 @@ steps:
         API_KEY: <<parameters.api-key>>
       command: << include(scripts/verify.sh) >>
   - store_artifacts:
-      path: df_alert_summary.json
-      destination: deepfactor
+      path: deepfactor_summary.json
   - store_artifacts:
-      path: df_alert_list.json
-      destination: deepfactor
+      path: deepfactor_alert_list.json
