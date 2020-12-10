@@ -31,9 +31,8 @@ if [[ "$status" != "0" ]]; then
 fi
 
 
-DF_PORTAL_URL=$(echo $DF_PORTAL_URL | sed 's:/*$::')
+DF_PORTAL_URL=$(echo "${DF_PORTAL_URL%/*}")
 
-echo $VALUE $TRIMMED
 echo "app:${DF_APP}"
 echo "component:${DF_COMPONENT}"
 echo "portal_url:${DF_PORTAL_URL}"
