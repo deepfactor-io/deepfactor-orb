@@ -1,5 +1,4 @@
 # DeepFactor Orb
-[![CircleCI Build Status](https://circleci.com/gh/deepfactor-io/deepfactor-orb.svg?style=shield "CircleCI Build Status")](https://circleci.com/gh/deepfactor-io/deepfactor-orb) [![CircleCI Orb Version](https://img.shields.io/badge/endpoint.svg?url=https://badges.circleci.io/orb/deepfactor/deepfactor-orb)](https://circleci.com/orbs/registry/orb/deepfactor/deepfactor-orb) [![GitHub License](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/deepfactor-io/deepfactor-orb/master/LICENSE) [![CircleCI Community](https://img.shields.io/badge/community-CircleCI%20Discuss-343434.svg)](https://discuss.circleci.com/c/ecosystem/orbs)
 
 [![DeepFactor](https://static.deepfactor.io/logo.png)](https://deepfactor.io)
 
