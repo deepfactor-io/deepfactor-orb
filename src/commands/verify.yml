@@ -14,7 +14,7 @@ parameters:
     description: "The component name to be used inside DeepFactor"
   portal-url:
     type: string
-    description: "The DeepFactor portal url eg https://portal.deepfactor.io"
+    description: "The DeepFactor portal url eg https://deepfactor.mycompany.com"
 steps:
   - run:
       name: Verify and report issues detected by DeepFactor
