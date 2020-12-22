@@ -33,7 +33,7 @@ steps:
           exit 1
         fi
         if [ -z "<<parameters.tag>>" ]; then
-          dfctl run -v -a <<parameters.app-name>> -c <<parameters.component-name>> --cmd "<<parameters.cmd>>" --version "<<parameters.version>>"
+          dfctl run -v -a <<parameters.app-name>> -c <<parameters.component-name>> --version "<<parameters.version>>" --cmd "<<parameters.cmd>>"
         else
-          dfctl run -v -a <<parameters.app-name>> -c <<parameters.component-name>> -t <<parameters.tag>> --cmd "<<parameters.cmd>>" --version "<<parameters.version>>"
+          dfctl run -v -a <<parameters.app-name>> -c <<parameters.component-name>> -t <<parameters.tag>> --version "<<parameters.version>>" --cmd "<<parameters.cmd>>"
         fi
