@@ -50,7 +50,7 @@ if [[ -z "$DF_SCAN_CONFIG_SCAN_URL" ]]; then
     exit 1
 fi 
 
-SCAN_HOST=$( echo $DF_SCAN_CONFIG_SCAN_URL | sed -e 's/[^/]*\/\/\([^@]*@\)\?\([^:/]*\).*/\2/' )
+SCAN_HOST=$( echo "$DF_SCAN_CONFIG_SCAN_URL" | sed -e 's/[^/]*\/\/\([^@]*@\)\?\([^:/]*\).*/\2/' )
 
 
 generate_start_scan_request()
@@ -72,7 +72,7 @@ EOF
 
 }
 
-status=$( curl -ks -X POST --data "$(generate_start_scan_request)" --write-out %{http_code} --output /dev/null "${DF_PORTAL_URL}/api/services/v1/webservices/scans" -H "Authorization: Bearer ${DF_API_KEY}" )
-if [ $status != 200]; then
+status=$( curl -ks -X POST --data "$(generate_start_scan_request)" --write-out '%{http_code}' --output /dev/null "${DF_PORTAL_URL}/api/services/v1/webservices/scans" -H "Authorization: Bearer ${DF_API_KEY}" )
+if [ "$status" != 200 ]; then
     exit 1
 fi
