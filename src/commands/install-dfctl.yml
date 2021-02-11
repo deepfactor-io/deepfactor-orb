@@ -6,5 +6,7 @@ steps:
       command: |
         [ -w /usr/local/bin ] && SUDO="" || SUDO=sudo
         $SUDO apt-get update
-        $SUDO apt-get install -y apt-transport-https
-        curl https://repo.deepfactor.io/install-dfctl.sh | $SUDO sh -
+        $SUDO apt-get install -y apt-transport-https curl gnupg
+        $SUDO echo "deb https://repo.deepfactor.io/repo/deb/ ./" | $SUDO tee /etc/apt/sources.list.d/deepfactor.list
+        $SUDO curl https://repo.deepfactor.io/repo/keys/D5DC8225.asc | $SUDO apt-key add -
+        $SUDO apt update ; $SUDO apt install -y deepfactor-runtime
