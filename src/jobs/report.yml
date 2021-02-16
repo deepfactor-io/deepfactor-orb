@@ -27,4 +27,3 @@ steps:
       app-name: <<parameters.app-name>>
       component-name: <<parameters.component-name>>
       portal-url: <<parameters.portal-url>>
-      
