@@ -25,6 +25,9 @@ steps:
         API_KEY: <<parameters.api-key>>
       command: << include(scripts/verify.sh) >>
   - store_artifacts:
-      path: deepfactor_summary.json
+      path: /tmp/deepfactor_summary.json
   - store_artifacts:
-      path: deepfactor_alert_list.json
+      path: /tmp/deepfactor_alert_list.json
+  - aws-s3/copy:
+      from: 's3://df-ci-transient'
+      to: '/tmp'
