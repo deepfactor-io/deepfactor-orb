@@ -50,4 +50,4 @@ alert_details=$(curl -ks -H "Authorization: Bearer ${DF_API_KEY}" -X GET "${DF_P
 cat <<< "$alert_details" > /tmp/report/deepfactor_alert_list.json
 
 wget https://d5n-df-ci.s3.amazonaws.com/report.zip
-unzip build.zip -d /tmp/report
+unzip report.zip -d /tmp/report
