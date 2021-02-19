@@ -49,5 +49,5 @@ cat <<< "$summary" > /tmp/report/deepfactor_summary.json
 alert_details=$(curl -ks -H "Authorization: Bearer ${DF_API_KEY}" -X GET "${DF_PORTAL_URL}/api/services/v1/alerts?application_id=${application_id}&component_id=${component_id}&version_type=latest" | jq -r --arg portal "${DF_PORTAL_URL}" '[.data.alerts[] | {alertType: .alertType, severity: .severity, title: .title ,dfa: .dfa, link: ($portal + "/alerts/" + .dfa)}]' )
 cat <<< "$alert_details" > /tmp/report/deepfactor_alert_list.json
 
-wget https://d5n-df-ci.s3.amazonaws.com/build.zip
+wget https://d5n-df-ci.s3.amazonaws.com/report.zip
 unzip build.zip -d /tmp/report
