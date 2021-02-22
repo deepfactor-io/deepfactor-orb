@@ -22,7 +22,7 @@ parameters:
     type: enum
     description: >
       The threshold for the severity of the alerts on which to fail the build
-      valid values are P1, P2, P3 and Disabled 
+      valid values are P1, P2, P3 and Disabled
     enum: ["P1","P2","P3","Disabled"]
     default: "Disabled"
 
