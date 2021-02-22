@@ -71,13 +71,13 @@ if [ "${DF_FAIL_SEVERITY}" != 'disabled' ]; then
     exit 1
   fi
   p2=$( jq '.p2' < /tmp/report/deepfactor_summary.json )
-  if [[ "${DF_FAIL_SEVERITY}" == 'p2' ]] && [[ "$p2" -gt 0 ]]; then
+  if [[ "${DF_FAIL_SEVERITY}" == 'p2' ]] && [[ "$p2" -gt 0 || "$p1" -gt 0 ]]; then
     echo 'DeepFactor detected alerts above threshold P2. Failing build'
     exit 1
   fi
   p3=$( jq '.p3' < /tmp/report/deepfactor_summary.json )
-  if [[ "${DF_FAIL_SEVERITY}" == 'p3' ]] && [[ "$p3" -gt 0 ]]; then
-    echo 'DeepFactor detected alerts above threshold. Failing build'
+  if [[ "${DF_FAIL_SEVERITY}" == 'p3' ]] && [[ "$p3" -gt 0 ||  "$p2" -gt 0 ||  "$p1" -gt 0 ]]; then
+    echo 'DeepFactor detected alerts above threshold P3. Failing build'
     exit 1
   fi
 fi
