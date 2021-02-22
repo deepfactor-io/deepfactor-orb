@@ -18,6 +18,13 @@ parameters:
   component-name:
     type: string
     description: The name of the component in DeepFactor
+  fail-severity-threshold:
+    type: enum
+    description: >
+      The threshold for the severity of the alerts on which to fail the build
+      valid values are P1, P2, P3 and Disabled 
+    enum: ["P1","P2","P3","Disabled"]
+    default: "Disabled"
 
 docker:
   - image: <<parameters.image>>

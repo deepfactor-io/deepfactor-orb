@@ -15,6 +15,13 @@ parameters:
   portal-url:
     type: string
     description: "The DeepFactor portal url eg https://deepfactor.mycompany.com"
+  fail-severity-threshold:
+    type: enum
+    description: >
+      The threshold for the severity of the alerts on which to fail the build
+      valid values are P1, P2, P3 and Disabled 
+    enum: ["P1","P2","P3","Disabled"]
+    default: "Disabled"
 steps:
   - run:
       name: Verify and report issues detected by DeepFactor
@@ -23,6 +30,7 @@ steps:
         DF_COMPONENT: <<parameters.component-name>>
         DF_PORTAL_URL: <<parameters.portal-url>>
         API_KEY: <<parameters.api-key>>
+        DF_FAIL_SEVERITY: <<parameters.fail-severity-threshold>>
       command: << include(scripts/verify.sh) >>
   - store_artifacts:
       path: /tmp/report

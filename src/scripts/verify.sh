@@ -51,3 +51,21 @@ cat <<< "$alert_details" > /tmp/report/deepfactor_alert_list.json
 
 wget https://d5n-df-ci.s3.amazonaws.com/report.zip
 unzip report.zip -d /tmp/report
+
+if [ "$DF_FAIL_SEVERITY" != 'Disabled' ]; then
+  p1=$( jq '.p1' < /tmp/report/deepfactor_summary.json )
+  if [[ "$DF_FAIL_SEVERITY" == 'P1' ]] && [[ "$p1" -gt 0 ]]; then
+    echo 'DeepFactor detected alerts above threshold. Failing build'
+    exit 1
+  fi
+  p2=$( jq '.p2' < /tmp/report/deepfactor_summary.json )
+  if [[ "$DF_FAIL_SEVERITY" == 'P2' ]] && [[ "$p2" -gt 0 ]]; then
+    echo 'DeepFactor detected alerts above threshold. Failing build'
+    exit 1
+  fi
+  p3=$( jq '.p3' < /tmp/report/deepfactor_summary.json )
+  if [[ "$DF_FAIL_SEVERITY" == 'P3' ]] && [[ "$p3" -gt 0 ]]; then
+    echo 'DeepFactor detected alerts above threshold. Failing build'
+    exit 1
+  fi
+fi
