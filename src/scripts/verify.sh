@@ -33,11 +33,19 @@ fi
 mkdir /tmp/report
 
 # Get application
-application_id=$( curl -ks -X GET "${DF_PORTAL_URL}/api/services/v1/applications" -H "Authorization: Bearer ${DF_API_KEY}" | jq -r --arg v "${DF_APP}" '.data.apps[] | select (.name==$v) | .application_id' )
+application_id=$( curl -ks -X GET "${DF_PORTAL_URL}/api/services/v1/applications" \
+                    -H "Authorization: Bearer ${DF_API_KEY}" | \
+                    jq -r --arg v "${DF_APP}" '.data.apps[] | select (.name==$v) | .application_id' )
+
 echo "application_id=${application_id}"
 
 # Get components
-component_version_tuple=$( curl -ks -X GET "${DF_PORTAL_URL}/api/services/v1/applications/${application_id}/components" -H "Authorization: Bearer ${DF_API_KEY}" | jq -r --arg c "${DF_COMPONENT}" '.data.components[] | select (.name==$c) | {component_id,latest_component_version,security}')
+component_version_tuple=$( curl -ks -X GET \
+                            "${DF_PORTAL_URL}/api/services/v1/applications/${application_id}/components" \
+                            -H "Authorization: Bearer ${DF_API_KEY}" | \
+                            jq -r --arg c "${DF_COMPONENT}" \
+                            '.data.components[] | select (.name==$c) | {component_id,latest_component_version,security}')
+
 component_id=$( jq -r '.component_id' <<< "$component_version_tuple" )
 echo "component_id=${component_id}"
 
@@ -46,7 +54,11 @@ component_security_summary=$( jq -r '.security' <<< "$component_version_tuple")
 summary=$(jq -r '{ total: .total, p1: .p1, p2: .p2, p3: .p3, p4: .p4 }' <<< "$component_security_summary")
 cat <<< "$summary" > /tmp/report/deepfactor_summary.json
 
-alert_details=$(curl -ks -H "Authorization: Bearer ${DF_API_KEY}" -X GET "${DF_PORTAL_URL}/api/services/v1/alerts?application_id=${application_id}&component_id=${component_id}&version_type=latest" | jq -r --arg portal "${DF_PORTAL_URL}" '[.data.alerts[] | {alertType: .alertType, severity: .severity, title: .title ,dfa: .dfa, link: ($portal + "/alerts/" + .dfa)}]' )
+alert_details=$(curl -ks -X GET "${DF_PORTAL_URL}/api/services/v1/alerts?application_id=${application_id}&component_id=${component_id}&version_type=latest" \
+                    -H "Authorization: Bearer ${DF_API_KEY}" \
+                    | jq -r --arg portal "${DF_PORTAL_URL}" \
+                    '[.data.alerts[] | {alertType: .alertType, severity: .severity, title: .title ,dfa: .dfa, link: ($portal + "/alerts/" + .dfa)}]' )
+
 cat <<< "$alert_details" > /tmp/report/deepfactor_alert_list.json
 
 wget http://df-ci-assets-test1.s3-website-us-west-2.amazonaws.com/index.html -O /tmp/report/index.html
