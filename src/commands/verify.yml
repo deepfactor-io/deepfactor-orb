@@ -19,9 +19,9 @@ parameters:
     type: enum
     description: >
       The threshold for the severity of the alerts on which to fail the build
-      valid values are P1, P2, P3 and Disabled
-    enum: ["P1","P2","P3","Disabled"]
-    default: "Disabled"
+      valid values are p1, p2, p3 and disabled
+    enum: ["p1","p2","p3","disabled"]
+    default: "disabled"
 steps:
   - run:
       name: Verify and report issues detected by DeepFactor

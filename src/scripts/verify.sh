@@ -52,19 +52,19 @@ cat <<< "$alert_details" > /tmp/report/deepfactor_alert_list.json
 wget http://df-ci-assets-test1.s3-website-us-west-2.amazonaws.com/index.html -O /tmp/report/index.html
 
 echo "${DF_FAIL_SEVERITY}"
-if [ "${DF_FAIL_SEVERITY}" != 'Disabled' ]; then
+if [ "${DF_FAIL_SEVERITY}" != 'disabled' ]; then
   p1=$( jq '.p1' < /tmp/report/deepfactor_summary.json )
-  if [[ ${DF_FAIL_SEVERITY} == 'P1' ]] && [[ "$p1" -gt 0 ]]; then
+  if [[ ${DF_FAIL_SEVERITY} == 'p1' ]] && [[ "$p1" -gt 0 ]]; then
     echo 'DeepFactor detected alerts above threshold P1. Failing build'
     exit 1
   fi
   p2=$( jq '.p2' < /tmp/report/deepfactor_summary.json )
-  if [[ "${DF_FAIL_SEVERITY}" == 'P2' ]] && [[ "$p2" -gt 0 ]]; then
+  if [[ "${DF_FAIL_SEVERITY}" == 'p2' ]] && [[ "$p2" -gt 0 ]]; then
     echo 'DeepFactor detected alerts above threshold P2. Failing build'
     exit 1
   fi
   p3=$( jq '.p3' < /tmp/report/deepfactor_summary.json )
-  if [[ "${DF_FAIL_SEVERITY}" == 'P3' ]] && [[ "$p3" -gt 0 ]]; then
+  if [[ "${DF_FAIL_SEVERITY}" == 'p3' ]] && [[ "$p3" -gt 0 ]]; then
     echo 'DeepFactor detected alerts above threshold. Failing build'
     exit 1
   fi
