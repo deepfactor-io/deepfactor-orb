@@ -50,6 +50,10 @@ if [[ -z "$DF_SCAN_CONFIG_SCAN_URL" ]]; then
     exit 1
 fi 
 
+if [[ -z "$DF_COMPONENT_VERSION" ]]; then
+    DF_COMPONENT_VERSION="$CIRCLE_BUILD_NUM" 
+fi
+
 SCAN_HOST=$( echo "$DF_SCAN_CONFIG_SCAN_URL" | sed -e 's/[^/]*\/\/\([^@]*@\)\?\([^:/]*\).*/\2/' )
 
 generate_start_scan_request()
@@ -58,7 +62,7 @@ generate_start_scan_request()
 {
     "application_name":"$DF_APP",
     "component_name":"$DF_COMPONENT",
-    "component_version":"<<parameters.version>>",
+    "component_version":"$DF_COMPONENT_VERSION",
     "scan_config":
     {
         "scan_type":"$DF_SCAN_CONFIG_TYPE",
