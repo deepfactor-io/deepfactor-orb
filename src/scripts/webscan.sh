@@ -58,7 +58,7 @@ generate_start_scan_request()
 {
     "application_name":"$DF_APP",
     "component_name":"$DF_COMPONENT",
-    "component_version":"$DF_COMPONENT_VERSION",
+    "component_version":"<<parameters.version>>",
     "scan_config":
     {
         "scan_type":"$DF_SCAN_CONFIG_TYPE",
