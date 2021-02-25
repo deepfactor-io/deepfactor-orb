@@ -12,6 +12,10 @@ parameters:
   component-name:
     type: string
     description: "The component name to be used inside DeepFactor"
+  version:
+    type: string
+    description: Optional version for the component
+    default: '${CIRCLE_BUILD_NUM}'
   portal-url:
     type: string
     description: "The DeepFactor portal url eg https://deepfactor.mycompany.com"
@@ -39,6 +43,7 @@ steps:
       environment:
         DF_APP: <<parameters.app-name>>
         DF_COMPONENT: <<parameters.component-name>>
+        DF_COMPONENT_VERSION: <<parameters.version>>
         DF_PORTAL_URL: <<parameters.portal-url>>
         API_KEY: <<parameters.api-key>>
         DF_SCAN_CONFIG_TYPE: <<parameters.scan-type>>
