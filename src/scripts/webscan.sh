@@ -51,7 +51,7 @@ if [[ -z "$DF_SCAN_CONFIG_SCAN_URL" ]]; then
 fi 
 
 if [[ -z "$DF_COMPONENT_VERSION" ]]; then
-    DF_COMPONENT_VERSION="$CIRCLE_BUILD_NUM" 
+    DF_COMPONENT_VERSION="${CIRCLE_BUILD_NUM}" 
 fi
 
 SCAN_HOST=$( echo "$DF_SCAN_CONFIG_SCAN_URL" | sed -e 's/[^/]*\/\/\([^@]*@\)\?\([^:/]*\).*/\2/' )
