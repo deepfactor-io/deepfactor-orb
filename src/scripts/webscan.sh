@@ -52,7 +52,6 @@ fi
 
 SCAN_HOST=$( echo "$DF_SCAN_CONFIG_SCAN_URL" | sed -e 's/[^/]*\/\/\([^@]*@\)\?\([^:/]*\).*/\2/' )
 
-
 generate_start_scan_request()
 {
     cat <<EOF
