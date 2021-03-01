@@ -15,7 +15,6 @@ parameters:
   version:
     type: string
     description: Optional version for the component
-    default: ${CIRCLE_BUILD_NUM}
   portal-url:
     type: string
     description: "The DeepFactor portal url eg https://deepfactor.mycompany.com"
