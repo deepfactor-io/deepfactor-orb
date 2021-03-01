@@ -15,6 +15,7 @@ parameters:
   version:
     type: string
     description: Optional version for the component
+    default: ""
   portal-url:
     type: string
     description: "The DeepFactor portal url eg https://deepfactor.mycompany.com"

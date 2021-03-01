@@ -21,6 +21,7 @@ parameters:
   version:
     type: string
     description: Optional version for the component
+    default: ""
   scan-type:
     type: enum
     description: "The type of scan can be either owasp-zap-full or owasp-zap-api"
