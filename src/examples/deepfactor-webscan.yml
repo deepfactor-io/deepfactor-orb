@@ -10,9 +10,8 @@ usage:
     build:
       jobs:
         - deepfactor/web-scan:
-          portal-url: "https://yourdeepfactor.yourcompany.com"
-          app-name: circleci-demo-job
-          component-name: circleci-demo-component
-          version: "1.0.0"
-          scan-url: "https://yourstagingurl"
-
+            portal-url: "https://yourdeepfactor.yourcompany.com"
+            app-name: circleci-demo-job
+            component-name: circleci-demo-component
+            version: "1.0.0"
+            scan-url: "https://yourstagingurl"
