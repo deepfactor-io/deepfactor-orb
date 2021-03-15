@@ -61,7 +61,7 @@ alert_details=$(curl -ks -X GET "${DF_PORTAL_URL}/api/services/v1/alerts?applica
 
 cat <<< "$alert_details" > /tmp/report/deepfactor_alert_list.json
 
-wget http://df-ci-assets-test1.s3-website-us-west-2.amazonaws.com/index.html -O /tmp/report/index.html
+wget https://ci-assets.deepfactor.io/index.html -O /tmp/report/index.html
 
 echo "${DF_FAIL_SEVERITY}"
 if [ "${DF_FAIL_SEVERITY}" != 'disabled' ]; then

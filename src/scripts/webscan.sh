@@ -35,6 +35,11 @@ if [[ -z "$DF_SCAN_CONFIG_TYPE" ]]; then
     exit 1
 fi
 
+if [[ "$DF_SCAN_CONFIG_TYPE" == "owasp-zap-api" ]] && [[ -z "$DF_SCAN_API_DOCS_URL" ]]; then
+    echo "Param \"scan-api-docs-url\" is required for the api scans"
+    exit 1
+fi
+
 if [[ -z "$DF_SCAN_CONFIG_STRENGTH" ]]; then 
     echo "Param \"scan-strength\" is missing"
     exit 1
@@ -70,6 +75,7 @@ generate_start_scan_request()
         "active_scan_policy_strength":"$DF_SCAN_CONFIG_STRENGTH",
         "auth_type":"$DF_SCAN_CONFIG_AUTH_TYPE",
         "external_scan_url":"$DF_SCAN_CONFIG_SCAN_URL",
+        "api_scan_url":"$DF_SCAN_API_DOCS_URL",
         "host":"$SCAN_HOST"
     }
 }
