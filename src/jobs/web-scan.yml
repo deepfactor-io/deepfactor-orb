@@ -1,0 +1,61 @@
+description: >
+  Run a web scan against a web application
+parameters:
+  image:
+    description: Enter a custom docker image for this job. By default CircleCI's optimized `cimg/base` image will be used.
+    type: string
+    default: "cimg/base:stable"
+  api-key:
+    type: env_var_name
+    default: DF_API_KEY
+    description: Name of the environment variable storing your DeepFactor API Key
+  portal-url:
+    type: string
+    description: URL of your DeepFactor portal eg. https://deepfactor.mycompany.com
+  app-name:
+    type: string
+    description: The name of the application in DeepFactor
+  component-name:
+    type: string
+    description: The name of the component in DeepFactor
+  version:
+    type: string
+    description: Optional version for the component
+    default: ""
+  scan-type:
+    type: enum
+    description: "The type of scan can be either owasp-zap-full or owasp-zap-api"
+    default: "owasp-zap-full"
+    enum: ["owasp-zap-full","owasp-zap-api"]
+  scan-api-docs-url:
+    type: string
+    description: "The path of the swagger json/yaml document. The path can be relative (hosted on the same webserver) or an absolute path reachable by the DeepFactorPortal"
+    default: ""
+  scan-strength:
+    type: enum
+    description: "The strength of the scan. Possible values are Low, Medium, High"
+    default: "Medium"
+    enum: ["Low","Medium","High"]
+  scan-auth-type:
+    type: enum
+    description: "The auth type to use for the scanned application, Possible values are none, custom, formBasedAuthentication, jsonBasedAuthentication, scriptBasedAuthentication"
+    default: "none"
+    enum: ["none","custom","formBasedAuthentication","jsonBasedAuthentication","scriptBasedAuthentication"]
+  scan-url:
+    type: string
+    description: "The url of the application to run the scan against"
+
+docker:
+  - image: <<parameters.image>>
+
+steps:
+  - run-webscan:
+      app-name: <<parameters.app-name>>
+      component-name: <<parameters.component-name>>
+      portal-url: <<parameters.portal-url>>
+      scan-type: <<parameters.scan-type>>
+      scan-api-docs-url: <<parameters.scan-api-docs-url>>
+      scan-strength: <<parameters.scan-strength>>
+      scan-auth-type: <<parameters.scan-auth-type>>
+      scan-url: <<parameters.scan-url>>
+      version: <<parameters.version>>

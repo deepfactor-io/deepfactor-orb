@@ -4,7 +4,7 @@ description: >
 usage:
   version: 2.1
   orbs:
-    deepfactor: deepfactor/deepfactor@1.0.0
+    deepfactor: deepfactor/deepfactor@1.2.0
   workflows:
     version: 2.1
     build:

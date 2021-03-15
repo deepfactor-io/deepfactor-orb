@@ -1,0 +1,37 @@
+description:
+  Get the report of the DeepFactor detected alerts and issues
+parameters:
+  image:
+    description: Enter a custom docker image for this job. By default CircleCI's optimized `cimg/base` image will be used.
+    type: string
+    default: "cimg/base:stable"
+  api-key:
+    type: env_var_name
+    default: DF_API_KEY
+    description: Name of the environment variable storing your DeepFactor API Key
+  portal-url:
+    type: string
+    description: URL of your DeepFactor portal eg. https://deepfactor.mycompany.com
+  app-name:
+    type: string
+    description: The name of the application in DeepFactor
+  component-name:
+    type: string
+    description: The name of the component in DeepFactor
+  fail-severity-threshold:
+    type: enum
+    description: >
+      The threshold for the severity of the alerts on which to fail the build
+      valid values are p1, p2, p3 and disabled
+    enum: ["p1","p2","p3","disabled"]
+    default: "disabled"
+
+docker:
+  - image: <<parameters.image>>
+
+steps:
+  - verify:
+      app-name: <<parameters.app-name>>
+      component-name: <<parameters.component-name>>
+      portal-url: <<parameters.portal-url>>
+      fail-severity-threshold: <<parameters.fail-severity-threshold>>
