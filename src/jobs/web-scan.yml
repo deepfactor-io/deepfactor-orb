@@ -40,7 +40,35 @@ parameters:
     type: enum
     description: "The auth type to use for the scanned application, Possible values are none, custom, formBasedAuthentication, jsonBasedAuthentication, scriptBasedAuthentication"
     default: "none"
-    enum: ["none","custom","formBasedAuthentication","jsonBasedAuthentication","scriptBasedAuthentication"]
+    enum: ["none","custom","form"]
+  scan-form-auth-login-uri:
+    type: string
+    description: "Relative POST URI which will be called to authenticate the test user"
+    default: "/login"
+  scan-form-auth-username:
+    type: string
+    description: "User name of the test user for authentication during scan"
+    default: ""
+  scan-form-auth-password:
+    type: string
+    description: "Password of the test user for authentication during scan"
+    default: ""
+  scan-form-auth-form-data:
+    type: string
+    description: "The form data used for authentication"
+    default: "username={%username%}&password={%password%}"
+  scan-form-auth-loggedin-indicator:
+    type: string
+    description: "Regex pattern to recognize logged-in state in the response. Example: <a href=\"logout.jsp\">Logout</a>"
+    default: ""
+  scan-form-auth-loggedout-indicator:
+    type: string
+    description: "Regex pattern to recognize logged-out state in the response. Example: <a href=\"login.jsp\">Login</a>"
+    default: ""
+  scan-custom-token-auth:
+    type: string
+    description: "This token will be sent in Authorization header of each request made by the scanner. Please note, you may need to add Bearer before the token if you are using JWT"
+    default: ""
   scan-url:
     type: string
     description: "The url of the application to run the scan against"
@@ -57,5 +85,12 @@ steps:
       scan-api-docs-url: <<parameters.scan-api-docs-url>>
       scan-strength: <<parameters.scan-strength>>
       scan-auth-type: <<parameters.scan-auth-type>>
+      scan-form-auth-login-uri: <<parameters.scan-form-auth-login-uri>>
+      scan-form-auth-username: <<parameters.scan-form-auth-username>>
+      scan-form-auth-password: <<parameters.scan-form-auth-password>>
+      scan-form-auth-form-data: <<parameters.scan-form-auth-form-data>>
+      scan-form-auth-loggedin-indicator: <<parameters.scan-form-auth-loggedin-indicator>>
+      scan-form-auth-loggedout-indicator: <<parameters.scan-form-auth-loggedout-indicator>>
+      scan-custom-token-auth: <<parameters.scan-custom-token-auth>>
       scan-url: <<parameters.scan-url>>
       version: <<parameters.version>>
