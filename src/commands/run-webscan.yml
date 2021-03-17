@@ -93,6 +93,6 @@ steps:
         DF_SCAN_AUTH_FORM_PASSWORD: <<parameters.scan-form-auth-password>>
         DF_SCAN_AUTH_FORM_DATA: <<parameters.scan-form-auth-form-data>>
         DF_SCAN_AUTH_FORM_LOGGEDIN: <<parameters.scan-form-auth-loggedin-indicator>>
-        DF_SCAN_AUTH_FORM_LOGGEDOUT: <<parameters.scan-form-auth-loggedout-indicator
+        DF_SCAN_AUTH_FORM_LOGGEDOUT: <<parameters.scan-form-auth-loggedout-indicator>>
         DF_SCAN_AUTH_CUSTOM_TOKEN: <<parameters.scan-custom-token-auth>>
       command: << include(scripts/webscan.sh) >>
