@@ -50,7 +50,7 @@ if [[ -z "$DF_SCAN_CONFIG_AUTH_TYPE" ]]; then
     exit 1
 fi
 
-if [[ ! -z "$DF_SCAN_CONFIG_AUTH_TYPE" ]] && [ "$DF_SCAN_CONFIG_AUTH_TYPE" == "form" ]; then
+if [[ -n "$DF_SCAN_CONFIG_AUTH_TYPE" ]] && [ "$DF_SCAN_CONFIG_AUTH_TYPE" == "form" ]; then
     if [[ -z "$DF_SCAN_AUTH_FORM_LOGIN_URI" ]] ||
        [[ -z "$DF_SCAN_AUTH_FORM_USERNAME" ]]  ||
        [[ -z "$DF_SCAN_AUTH_FORM_PASSWORD" ]]  ||
@@ -62,7 +62,7 @@ if [[ ! -z "$DF_SCAN_CONFIG_AUTH_TYPE" ]] && [ "$DF_SCAN_CONFIG_AUTH_TYPE" == "f
     fi
 fi
 
-if [[ ! -z "$DF_SCAN_CONFIG_AUTH_TYPE" ]] && [ "$DF_SCAN_CONFIG_AUTH_TYPE" == "custom" ]; then
+if [[ -n "$DF_SCAN_CONFIG_AUTH_TYPE" ]] && [ "$DF_SCAN_CONFIG_AUTH_TYPE" == "custom" ]; then
     if [[ -z "$DF_SCAN_AUTH_CUSTOM_TOKEN" ]]; then
        echo "Parameters \"scan-custom-token-auth\" missing for custom token authentication"
        exit 1
