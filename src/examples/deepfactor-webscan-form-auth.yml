@@ -1,0 +1,24 @@
+description: >
+  This example shows how to run a webscan against a staging environment which
+  uses form based authentication.
+usage:
+  version: 2.1
+  orbs:
+    deepfactor: deepfactor/deepfactor@1.2.0
+  workflows:
+    version: 2.1
+    build:
+      jobs:
+        - deepfactor/web-scan:
+            portal-url: "https://yourdeepfactor.yourcompany.com"
+            app-name: circleci-demo-job
+            component-name: circleci-demo-component
+            version: "1.0.0"
+            scan-url: "https://yourstagingurl"
+            scan-auth-type: "form"
+            scan-form-auth-login-uri: "/login"
+            scan-form-auth-username: "yourusername" # set in environment variable
+            scan-form-auth-password: "yourpassword" # set through environment variable
+            scan-form-auth-form-data: "username={%username%}&password={%password%}"
+            scan-form-auth-loggedin-indicator: "<a href=&#8220;logout.jsp&#8221;>Logout</a>"
+            scan-form-auth-loggedout-indicator: "<a href=&#8220;login.jsp&#8221;>Login</a>"
