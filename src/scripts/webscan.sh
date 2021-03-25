@@ -135,11 +135,11 @@ EOF
 }
 
 status=$( curl -ks -X POST --data \
-            "$(generate_start_scan_request)" \
-            --write-out '%{http_code}' \
-            --output /dev/null \
-            "${DF_PORTAL_URL}/api/services/v1/webservices/scans" \
-            -H "Authorization: Bearer ${DF_API_KEY}" )
+        "$(generate_start_scan_request)" \
+        --write-out '%{http_code}' \
+        --output /dev/null \
+        "${DF_PORTAL_URL}/api/services/v1/webservices/scans" \
+        -H "Authorization: Bearer ${DF_API_KEY}" )
 if [ "$status" != 200 ]; then
     exit 1
 fi
