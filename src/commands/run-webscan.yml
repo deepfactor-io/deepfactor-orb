@@ -28,6 +28,10 @@ parameters:
     type: string
     description: "The path of the swagger json/yaml document. The path can be relative (hosted on the same webserver) or an absolute path reachable by the DeepFactorPortal"
     default: ""
+  scan-host:
+    type: string
+    description: "HTTP Host parameter required for valid requests to the webservice. This value will be sent in the \"Host\" header of each request made by the scanner."
+    default: ""
   scan-strength:
     type: enum
     description: "The strength of the scan. Possible values are Low, Medium, High"
@@ -37,7 +41,35 @@ parameters:
     type: enum
     description: "The auth type to use for the scanned application, Possible values are none, custom, formBasedAuthentication, jsonBasedAuthentication, scriptBasedAuthentication"
     default: "none"
-    enum: ["none","custom","formBasedAuthentication","jsonBasedAuthentication","scriptBasedAuthentication"]
+    enum: ["none","custom","form"]
+  scan-form-auth-login-uri:
+    type: string
+    description: "Relative POST URI which will be called to authenticate the test user"
+    default: "/login"
+  scan-form-auth-username:
+    type: string
+    description: "User name of the test user for authentication during scan"
+    default: ""
+  scan-form-auth-password:
+    type: string
+    description: "Password of the test user for authentication during scan"
+    default: ""
+  scan-form-auth-form-data:
+    type: string
+    description: "The form data used for authentication"
+    default: "username={%username%}&password={%password%}"
+  scan-form-auth-loggedin-indicator:
+    type: string
+    description: "Regex pattern to recognize logged-in state in the response. Example: <a href=\"logout.jsp\">Logout</a>"
+    default: ""
+  scan-form-auth-loggedout-indicator:
+    type: string
+    description: "Regex pattern to recognize logged-out state in the response. Example: <a href=\"login.jsp\">Login</a>"
+    default: ""
+  scan-custom-token-auth:
+    type: string
+    description: "This token will be sent in Authorization header of each request made by the scanner. Please note, you may need to add Bearer before the token if you are using JWT"
+    default: ""
   scan-url:
     type: string
     description: "The url of the application to run the scan against"
@@ -55,4 +87,12 @@ steps:
         DF_SCAN_CONFIG_STRENGTH: <<parameters.scan-strength>>
         DF_SCAN_CONFIG_AUTH_TYPE: <<parameters.scan-auth-type>>
         DF_SCAN_CONFIG_SCAN_URL: <<parameters.scan-url>>
+        DF_SCAN_HOST: <<parameters.scan-host>>
+        DF_SCAN_AUTH_FORM_LOGIN_URI: <<parameters.scan-form-auth-login-uri>>
+        DF_SCAN_AUTH_FORM_USERNAME: <<parameters.scan-form-auth-username>>
+        DF_SCAN_AUTH_FORM_PASSWORD: <<parameters.scan-form-auth-password>>
+        DF_SCAN_AUTH_FORM_DATA: <<parameters.scan-form-auth-form-data>>
+        DF_SCAN_AUTH_FORM_LOGGEDIN: <<parameters.scan-form-auth-loggedin-indicator>>
+        DF_SCAN_AUTH_FORM_LOGGEDOUT: <<parameters.scan-form-auth-loggedout-indicator>>
+        DF_SCAN_AUTH_CUSTOM_TOKEN: <<parameters.scan-custom-token-auth>>
       command: << include(scripts/webscan.sh) >>
