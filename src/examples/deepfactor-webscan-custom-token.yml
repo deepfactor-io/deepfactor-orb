@@ -1,0 +1,19 @@
+description: >
+  This example shows how to run a webscan against a staging environment which
+  uses a token based authentication.
+usage:
+  version: 2.1
+  orbs:
+    deepfactor: deepfactor/deepfactor@1.2.0
+  workflows:
+    version: 2.1
+    build:
+      jobs:
+        - deepfactor/web-scan:
+            portal-url: "https://yourdeepfactor.yourcompany.com"
+            app-name: circleci-demo-job
+            component-name: circleci-demo-component
+            version: "1.0.0"
+            scan-url: "https://yourstagingurl"
+            scan-auth-type: "custom"
+            scan-custom-token-auth: "Bearer YOUR_JWT_TOKEN"
